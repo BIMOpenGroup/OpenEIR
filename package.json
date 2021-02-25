@@ -1,0 +1,25 @@
+{
+  "name": "openeir",
+  "version": "0.0.1",
+  "description": "openeirgenerator",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "start": "nuxt start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BIMOpenGroup/OpenEIR.git"
+  },
+  "author": "a.n.babinov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BIMOpenGroup/OpenEIR/issues"
+  },
+  "dependencies": {
+    "nuxt": "^2.15.2",
+    "vue": "^3.0.6"
+  }
+}
