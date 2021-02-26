@@ -14,16 +14,16 @@
 		</b-row>
 		<b-row class="text-center">
 			<b-col class="">
-				<label class="">Num:</label>
+				<label class="">Num1:</label>
 			</b-col>
 			<b-col class="">
-				<label class="">Num:</label>
+				<label class="">Num2:</label>
 			</b-col>
 			<b-col class="">
-				<label class="">Num:</label>
+				<label class="">Num3:</label>
 			</b-col>
 			<b-col class="">
-				<label class="">Num:</label>
+				<label class="">Num4:</label>
 			</b-col>
 		</b-row>
 		<b-row class="text-center">
@@ -107,12 +107,7 @@
 </body>
 </template>
 
-
 <script>
-// import Vue from 'vue'
-// Vue.component('todo-item', {
-//   template: '<li>Это одна задача в списке</li>'
-// })
 export default {
 	components: {
 },
@@ -333,4 +328,3 @@ body {
 	color: #ffffff;
   }
 </style>
-
