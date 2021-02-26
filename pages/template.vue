@@ -1,46 +1,151 @@
 <template>
-	<body>
-		<b-container>
-			<b-row class="text-center">
-				<b-col>
-					<input type='checkbox' v-b-toggle.collapse-1> Стадия П
-				</b-col>
-				<b-col>
-					<input type='checkbox' v-b-toggle.collapse-2> Стадия РД
-				</b-col>
-			</b-row>
-			<b-row class="text-center">
-				<b-col>
-				<b-collapse id="collapse-1" class="mt-2">
-					<b-card class="text-center w-100 p-3 bg-secondary text-light">
-						{{Stage_P}}
-					</b-card>
-				</b-collapse>
-				</b-col>
-				<b-col>
-				<b-collapse id="collapse-2" class="mt-2">
-					<b-card class="text-center w-100 p-3 bg-secondary text-light">
-						{{Stage_RD}}
-					</b-card>
-				</b-collapse>
-				</b-col>
-			</b-row>
-		</b-container>
-	</body>
+<body>
+  <b-container>
+	<b-row class="text-center">
+		<b-col>
+			<input type='checkbox' v-b-toggle.collapse-1> Стадия П
+		</b-col>
+		<b-col>
+			<input type='checkbox' v-b-toggle.collapse-2> Стадия РД
+		</b-col>
+	</b-row>
+	<div>
+		
+		
+	</div>
+
+	<b-row class="text-center">
+		<b-col>
+		<b-collapse id="collapse-1" class="mt-2">
+			<b-card class="text-center w-100 p-3 bg-secondary text-light">
+				{{Stage_P}}
+			</b-card>
+		</b-collapse>
+		</b-col>
+		<b-col>
+		<b-collapse id="collapse-2" class="mt-2">
+			<b-card class="text-center w-100 p-3 bg-secondary text-light">
+				{{Stage_RD}}
+			</b-card>
+		</b-collapse>
+		</b-col>
+	</b-row>
+
+	<b-row class="">
+	<div class="text-center w-100 p-3 bg-secondary text-light"> 
+		<!-- v-resize-text="{minFontSize: '50px', maxFontSize: '100px'} -->
+	<h3 class="text-center w-100 p-3 bg-secondary text-light">vue nuxt test</h3>
+	</div>
+	</b-row>
+	<form class=" " id="id_form">
+		<b-row class=" ">
+			<label class="">Number:</label>
+			<b-form-input class="input" placeholder="attack counter" v-model="input_atacs"></b-form-input>
+		</b-row>
+		<b-row class="text-center">
+			<b-col class="">
+				<label class="">Num1:</label>
+			</b-col>
+			<b-col class="">
+				<label class="">Num2:</label>
+			</b-col>
+			<b-col class="">
+				<label class="">Num3:</label>
+			</b-col>
+			<b-col class="">
+				<label class="">Num4:</label>
+			</b-col>
+		</b-row>
+		<b-row class="text-center">
+			<b-col class="">
+				<select class="" type="text" v-model="v_slct_hit">
+					<option>1+</option>
+					<option>2+</option>
+					<option>3+</option>
+					<option>4+</option>	
+					<option>5+</option>
+					<option>6+</option>
+				</select>
+					<!-- {{v_slct_hit}} -->
+			</b-col>
+			<b-col class="">
+				<select class="is-hovered" type="text" v-model="v_slct_wound">
+					<option>1+</option>
+					<option>2+</option>
+					<option>3+</option>
+					<option>4+</option>
+					<option>5+</option>
+					<option>6+</option>
+				</select>
+					<!-- {{v_slct_wound}} -->
+			</b-col>
+			<b-col class="">
+				<select class="is-hovered" type="text" v-model="v_slct_arm">
+					<option>No</option>
+					<option>2+</option>
+					<option>3+</option>
+					<option>4+</option>
+					<option>5+</option>
+					<option>6+</option>
+				</select>
+				<!-- {{v_slct_arm}} -->
+			</b-col>
+			<b-col class="">
+					<select class="is-hovered" type="text" v-model="v_slct_fnp">
+						<option>No</option>
+						<option>2+</option>
+						<option>3+</option>
+						<option>4+</option>
+						<option>5+</option>
+						<option>6+</option>
+					</select>
+					<!-- {{v_slct_fnp}} -->
+			</b-col>
+		</b-row>
+	</form>
+	<br>
+	<b-row class="">
+		<b-button block variant="primary" @click='roll()'>Create Results</b-button>
+	</b-row>
+	<b-row class="p-1">
+		Results:
+	</b-row>
+	<b-table class="text-center text-light" fixed sticky-header head-variant="dark" foot-variant="dark" table-variant ="dark" striped hover :items="items"></b-table>
+	<b-row class="p-3 text-center bg-secondary text-light">
+		<label class="text-center w-100 text-light">
+		{{ answer_data }}
+		</label>
+	</b-row>
+	<b-row class="p-3"></b-row>
+	<b-row class="">
+		<b-col class="">
+			<b-form-input class="input" placeholder="attack counter" v-model="input_dice_value"></b-form-input>
+		</b-col>
+		<b-col class="">
+			<b-button block variant="primary" @click='roll_d()'>D</b-button>
+		</b-col>
+	</b-row>
+	<p>
+	<!-- <NuxtLink to="/about">
+		About page
+	</NuxtLink> -->
+	</p>
+  </b-container>
+  <!-- <ol>
+  <todo-item></todo-item>
+</ol> -->
+</body>
 </template>
 
 <script>
 
-import stage_p from '../documents/stage_p.js'
-import stage_rd from '../documents/stage_rd'
+
 
 export default {
 	components: {
 },
   data () {
     return {
-		Stage_P: 'vTerminal',
-		Stage_RD: 'vTerminal',
 		input_dice_value: "100",
 		input_atacs: "55",
 		v_slct_hit: '2+',
@@ -54,20 +159,16 @@ export default {
 		}
 	}
   },
-  async created() {
-	this.Stage_P = stage_p
-	this.Stage_RD = stage_rd
-  },
-  	// props: {
-	// 	Stage_P: {
-	// 		required: false,
-	// 		default: 'vTerminal'
-	// 	},
-	// 	Stage_RD: {
-	// 		required: false,
-	// 		default: 'vTerminal'
-	// 	},
-	//   },
+  	props: {
+		Stage_P: {
+			required: false,
+			default: 'vTerminal'
+		},
+		Stage_RD: {
+			required: false,
+			default: 'vTerminal'
+		},
+	  },
 
 	methods: {
 		roll(){
