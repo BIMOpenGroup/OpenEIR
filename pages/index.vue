@@ -13,16 +13,155 @@
           Стадия П
           <b-collapse id="collapse-1" class="mt-2">
             <b-card class="text-center w-100 p-3 bg-secondary text-light">
-              <FccButton></FccButton>
-              <b> Разделы стадии П</b>
-              <b-form-checkbox-group
+              <h2>Разделы стадии П</h2>
+              <!-- <b-alert show variant="success">Разделы стадии П</b-alert> -->
+              <b-row class="mt-2 text-center"> </b-row>
+              <b-row>
+                <b-col>
+                  <input
+                    checked
+                    size="lg"
+                    type="checkbox"
+                    v-b-toggle.collapse-p-ar
+                  />
+                  AР
+                </b-col>
+                <b-col>
+                  <input
+                    checked
+                    size="lg"
+                    type="checkbox"
+                    v-b-toggle.collapse-p-kr
+                  />
+                  КР
+                </b-col>
+                <b-col>
+                  <input
+                    checked
+                    size="lg"
+                    type="checkbox"
+                    v-b-toggle.collapse-p-ov1
+                  />
+                  ОВ1
+                </b-col>
+                <b-col>
+                  <input
+                    checked
+                    size="lg"
+                    type="checkbox"
+                    v-b-toggle.collapse-p-ov2
+                  />
+                  ОВ2
+                </b-col>
+                <b-col>
+                  <input
+                    checked
+                    size="lg"
+                    type="checkbox"
+                    v-b-toggle.collapse-p-itp
+                  />
+                  ИТП
+                </b-col>
+                <b-col>
+                  <input
+                    checked
+                    size="lg"
+                    type="checkbox"
+                    v-b-toggle.collapse-p-vk
+                  />
+                  ВК
+                </b-col>
+                <b-col>
+                  <input
+                    checked
+                    size="lg"
+                    type="checkbox"
+                    v-b-toggle.collapse-p-apt
+                  />
+                  АПТ
+                </b-col>
+                <b-col>
+                  <input
+                    checked
+                    size="lg"
+                    type="checkbox"
+                    v-b-toggle.collapse-p-eom
+                  />
+                  ЕОМ
+                </b-col>
+                <b-col>
+                  <input
+                    checked
+                    size="lg"
+                    type="checkbox"
+                    v-b-toggle.collapse-p-ss
+                  />
+                  СС
+                </b-col>
+              </b-row>
+              <!-- <FccButton v-b-toggle.collapse-p-ar>АР</FccButton> -->
+              <!-- <b-form-checkbox-group
                 v-model="p_stage_value"
                 :options="options"
-              />
-              <b-collapse id="collapse-p-ar" class="mt-2">
-                <b-card>Hello!</b-card>
+                @click="check_stage_p"
+              /> -->
+              <b-collapse visible id="collapse-p-ar" class="mt-2">
+                <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                  <h5>Архитектурные решения</h5>
+                  {{ Stage_P }}
+                </b-card>
               </b-collapse>
-              {{ Stage_P }}
+              <b-collapse visible id="collapse-p-kr" class="mt-2">
+                <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                  <h5>Конструктивные решения</h5>
+                  {{ Stage_P }}
+                </b-card>
+              </b-collapse>
+              <b-collapse visible id="collapse-p-ov1" class="mt-2">
+                <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                  <h5>Отопление</h5>
+                  {{ Stage_P }}
+                </b-card>
+              </b-collapse>
+              <b-collapse visible id="collapse-p-ov2" class="mt-2">
+                <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                  <h5>Вентиляция и кондиционирование воздуха</h5>
+                  {{ Stage_P }}
+                </b-card>
+              </b-collapse>
+              <b-collapse visible id="collapse-p-itp" class="mt-2">
+                <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                  <h5>Индивидуальный тепловой пункт</h5>
+                  {{ Stage_P }}
+                </b-card>
+              </b-collapse>
+              <b-collapse visible id="collapse-p-vk" class="mt-2">
+                <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                  <h5>Внутренние водопровод и канализация</h5>
+                  {{ Stage_P }}
+                </b-card>
+              </b-collapse>
+              <b-collapse visible id="collapse-p-apt" class="mt-2">
+                <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                  <h5>
+                    Автоматизация системы дымоудаления или автоматизация
+                    пожаротушения
+                  </h5>
+                  {{ Stage_P }}
+                </b-card>
+              </b-collapse>
+              <b-collapse visible id="collapse-p-eom" class="mt-2">
+                <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                  <h5>Электрооборудование и освещение</h5>
+                  {{ Stage_P }}
+                </b-card>
+              </b-collapse>
+              <b-collapse visible id="collapse-p-ss" class="mt-2">
+                <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                  <h5>Системы связи</h5>
+                  {{ Stage_P }}
+                </b-card>
+              </b-collapse>
             </b-card>
           </b-collapse>
         </b-col>
@@ -74,28 +213,38 @@ export default {
     return {
       Stage_P: "vTerminal",
       Stage_RD: "vTerminal",
-      p_stage_value: [
-        "АР",
-        "КР",
-        "ОВ1",
-        "ОВ2",
-        "ИТП",
-        "ВК",
-        "АПТ",
-        "ЭОМ",
-        "СС",
-      ],
-      options: [
-        { text: "АР", value: "АР" },
-        { text: "КР", value: "КР" },
-        { text: "ОВ1", value: "ОВ1" },
-        { text: "ОВ2", value: "ОВ2" },
-        { text: "ИТП", value: "ИТП" },
-        { text: "ВК", value: "ВК" },
-        { text: "АПТ", value: "АПТ" },
-        { text: "ЭОМ", value: "ЭОМ" },
-        { text: "СС", value: "СС" },
-      ],
+      // p_stage_value: [
+      //   "АР",
+      //   "КР",
+      //   "ОВ1",
+      //   "ОВ2",
+      //   "ИТП",
+      //   "ВК",
+      //   "АПТ",
+      //   "ЭОМ",
+      //   "СС",
+      // ],
+      // visible_ar: true,
+      // visible_kr: true,
+      // visible_ov1: true,
+      // visible_ov2: true,
+      // visible_itp: true,
+      // visible_vk: true,
+      // visible_apt: true,
+      // visible_eom: true,
+      // visible_ss: true,
+      // visible_ar: true,
+      // options: [
+      //   { text: "АР", value: "АР" },
+      //   { text: "КР", value: "КР" },
+      //   { text: "ОВ1", value: "ОВ1" },
+      //   { text: "ОВ2", value: "ОВ2" },
+      //   { text: "ИТП", value: "ИТП" },
+      //   { text: "ВК", value: "ВК" },
+      //   { text: "АПТ", value: "АПТ" },
+      //   { text: "ЭОМ", value: "ЭОМ" },
+      //   { text: "СС", value: "СС" },
+      // ],
       // input_dice_value: "100",
       // input_atacs: "55",
       // v_slct_hit: '2+',
@@ -132,6 +281,13 @@ export default {
         this.Stage_P = null;
       }
     },
+    // check_visible_stage_p() {
+    //   if (this.p_stage_value.includes("АР")) {
+    //     this.visible_ar = true;
+    //   } else {
+    //     this.visible_ar = false;
+    //   }
+    // },
     check_stage_rd() {
       if (!this.Stage_RD) {
         this.Stage_RD = stage_rd.text;

@@ -1,7 +1,7 @@
 <template>
   <b-col>
-    <input type="checkbox" v-b-toggle.collapse-AR />
-    АР
+    <input type="checkbox" />
+    <!-- АР {{ AR }} -->
   </b-col>
 </template>
 
@@ -9,12 +9,25 @@
 export default {
   name: "FccButton", // vue component name
   props: {
-    check_section: {
-      type: String,
-      default: "Enter Button Text Here",
-    },
+    // check_section: {
+    //   type: String,
+    //   default: "Enter Button Text Here",
+    // },
   },
-  data() {},
+  data() {
+    return {
+      //   Stage_P: "vTerminal",
+    };
+  },
+  methods: {
+    // check_stage_p() {
+    //   if (!this.Stage_P) {
+    //     this.Stage_P = "stage_p.text@@@@@@@";
+    //   } else {
+    //     this.Stage_P = null;
+    //   }
+    // },
+  },
 };
 </script>
 
