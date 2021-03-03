@@ -108,6 +108,22 @@
               <b-collapse visible id="collapse-p-ar" class="mt-2">
                 <b-card class="text-center w-100 p-3 bg-secondary text-light">
                   <h5>Архитектурные решения</h5>
+                  <b-table
+                    :striped="true"
+                    :bordered="true"
+                    :borderless="false"
+                    :outlined="false"
+                    :small="true"
+                    :hover="true"
+                    :dark="false"
+                    :fixed="true"
+                    :foot-clone="false"
+                    :no-border-collapse="false"
+                    :items="items"
+                    :fields="fields"
+                    :head-variant="headVariant"
+                    :table-variant="secondary"
+                  ></b-table>
                   {{ Stage_P }}
                 </b-card>
               </b-collapse>
@@ -211,6 +227,18 @@ export default {
   },
   data() {
     return {
+      fields: ["Элементы раздела АР", "LOD", "LOI"],
+      items: [
+        {
+          "Элементы раздела АР": "Стена",
+          LOD:
+            "Точные габариты, Точное расположение, Внешний образ/вид, Материалы",
+          LOI:
+            "Площадь, Объем, Длина, Ширина, ADSK_Описание, ADSK_Корпус / ADSK_Секция, ADSK_Этаж, ADSK_Огнестойкость",
+        },
+        { "Элементы раздела АР": "Перекрытие", LOD: "Larsen", LOI: "Shaw" },
+        { "Элементы раздела АР": "Пол", LOD: "Geneva", LOI: "Wilson" },
+      ],
       Stage_P: "vTerminal",
       Stage_RD: "vTerminal",
       // p_stage_value: [
@@ -296,8 +324,16 @@ export default {
       }
     },
     clear() {
-      this.Stage_P = null;
-      this.Stage_RD = null;
+      if (this.Stage_P != null) {
+        this.Stage_P = null;
+      } else {
+        this.Stage_P = stage_p.text;
+      }
+      if (this.Stage_RD != null) {
+        this.Stage_RD = null;
+      } else {
+        this.Stage_RD = stage_p.text;
+      }
     },
     // roll(){
     // 	const data_form = [this.input_atacs,this.v_slct_hit,this.v_slct_wound,this.v_slct_arm,this.v_slct_fnp]
