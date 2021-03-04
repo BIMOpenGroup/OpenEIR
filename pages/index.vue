@@ -5,6 +5,7 @@
       <b-row class="mt-2 text-center">
         <b-col>
           <input
+            checked
             size="lg"
             type="checkbox"
             v-b-toggle.collapse-1
@@ -16,7 +17,7 @@
               <h2>Разделы стадии П</h2>
               <!-- <b-alert show variant="success">Разделы стадии П</b-alert> -->
               <b-row class="mt-2 text-center"> </b-row>
-              <b-row>
+              <b-row id="chekboxes">
                 <b-col>
                   <input
                     checked
@@ -99,90 +100,71 @@
                   СС
                 </b-col>
               </b-row>
-              <!-- <FccButton v-b-toggle.collapse-p-ar>АР</FccButton> -->
-              <!-- <b-form-checkbox-group
-                v-model="p_stage_value"
-                :options="options"
-                @click="check_stage_p"
-              /> -->
-              <b-collapse visible id="collapse-p-ar" class="mt-2">
-                <b-card class="text-center w-100 p-3 bg-secondary text-light">
-                  <h5>Архитектурные решения</h5>
-                  <b-table
-                    :striped="true"
-                    :bordered="true"
-                    :borderless="false"
-                    :outlined="false"
-                    :small="true"
-                    :hover="true"
-                    :dark="false"
-                    :fixed="true"
-                    :foot-clone="false"
-                    :no-border-collapse="false"
-                    :fields="fields.AR"
-                    :items="items.AR"
-                    :head-variant="null"
-                  ></b-table>
-                  {{ Stage_P }}
-                </b-card>
-              </b-collapse>
-              <b-collapse visible id="collapse-p-kr" class="mt-2">
-                <!-- <b-card class="text-center w-100 p-3 bg-secondary text-light"> -->
-                <TableRequi
-                  :title="titles.KR"
-                  :description="Stage_P"
-                  :fields_list="fields.KR"
-                  :items_list="items.KR"
-                ></TableRequi>
-                <h5>Конструктивные решения</h5>
-                {{ Stage_P }}
-                <!-- </b-card> -->
-              </b-collapse>
-              <b-collapse visible id="collapse-p-ov1" class="mt-2">
-                <b-card class="text-center w-100 p-3 bg-secondary text-light">
-                  <h5>Отопление</h5>
-                  {{ Stage_P }}
-                </b-card>
-              </b-collapse>
-              <b-collapse visible id="collapse-p-ov2" class="mt-2">
-                <b-card class="text-center w-100 p-3 bg-secondary text-light">
-                  <h5>Вентиляция и кондиционирование воздуха</h5>
-                  {{ Stage_P }}
-                </b-card>
-              </b-collapse>
-              <b-collapse visible id="collapse-p-itp" class="mt-2">
-                <b-card class="text-center w-100 p-3 bg-secondary text-light">
-                  <h5>Индивидуальный тепловой пункт</h5>
-                  {{ Stage_P }}
-                </b-card>
-              </b-collapse>
-              <b-collapse visible id="collapse-p-vk" class="mt-2">
-                <b-card class="text-center w-100 p-3 bg-secondary text-light">
-                  <h5>Внутренние водопровод и канализация</h5>
-                  {{ Stage_P }}
-                </b-card>
-              </b-collapse>
-              <b-collapse visible id="collapse-p-apt" class="mt-2">
-                <b-card class="text-center w-100 p-3 bg-secondary text-light">
-                  <h5>
-                    Автоматизация системы дымоудаления или автоматизация
-                    пожаротушения
-                  </h5>
-                  {{ Stage_P }}
-                </b-card>
-              </b-collapse>
-              <b-collapse visible id="collapse-p-eom" class="mt-2">
-                <b-card class="text-center w-100 p-3 bg-secondary text-light">
-                  <h5>Электрооборудование и освещение</h5>
-                  {{ Stage_P }}
-                </b-card>
-              </b-collapse>
-              <b-collapse visible id="collapse-p-ss" class="mt-2">
-                <b-card class="text-center w-100 p-3 bg-secondary text-light">
-                  <h5>Системы связи</h5>
-                  {{ Stage_P }}
-                </b-card>
-              </b-collapse>
+              <div id="stage-cards">
+                <b-collapse visible id="collapse-p-ar" class="mt-2">
+                  <TableRequi
+                    :title="titles.AR"
+                    :description="Stage_P"
+                    :fields_list="fields.AR"
+                    :items_list="items.AR"
+                  ></TableRequi>
+                </b-collapse>
+                <b-collapse visible id="collapse-p-kr" class="mt-2">
+                  <!-- <b-card class="text-center w-100 p-3 bg-secondary text-light"> -->
+                  <TableRequi
+                    :title="titles.KR"
+                    :description="Stage_P"
+                    :fields_list="fields.KR"
+                    :items_list="items.KR"
+                  ></TableRequi>
+                  <!-- </b-card> -->
+                </b-collapse>
+                <b-collapse visible id="collapse-p-ov1" class="mt-2">
+                  <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                    <h5>Отопление</h5>
+                    {{ Stage_P }}
+                  </b-card>
+                </b-collapse>
+                <b-collapse visible id="collapse-p-ov2" class="mt-2">
+                  <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                    <h5>Вентиляция и кондиционирование воздуха</h5>
+                    {{ Stage_P }}
+                  </b-card>
+                </b-collapse>
+                <b-collapse visible id="collapse-p-itp" class="mt-2">
+                  <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                    <h5>Индивидуальный тепловой пункт</h5>
+                    {{ Stage_P }}
+                  </b-card>
+                </b-collapse>
+                <b-collapse visible id="collapse-p-vk" class="mt-2">
+                  <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                    <h5>Внутренние водопровод и канализация</h5>
+                    {{ Stage_P }}
+                  </b-card>
+                </b-collapse>
+                <b-collapse visible id="collapse-p-apt" class="mt-2">
+                  <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                    <h5>
+                      Автоматизация системы дымоудаления или автоматизация
+                      пожаротушения
+                    </h5>
+                    {{ Stage_P }}
+                  </b-card>
+                </b-collapse>
+                <b-collapse visible id="collapse-p-eom" class="mt-2">
+                  <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                    <h5>Электрооборудование и освещение</h5>
+                    {{ Stage_P }}
+                  </b-card>
+                </b-collapse>
+                <b-collapse visible id="collapse-p-ss" class="mt-2">
+                  <b-card class="text-center w-100 p-3 bg-secondary text-light">
+                    <h5>Системы связи</h5>
+                    {{ Stage_P }}
+                  </b-card>
+                </b-collapse>
+              </div>
             </b-card>
           </b-collapse>
         </b-col>
@@ -235,34 +217,8 @@ export default {
   data() {
     return {
       titles: { AR: "Архитектурные решения", KR: "Конструктивные решения" },
-      fields: {
-        AR: ["Элементы раздела АР", "LOD", "LOI"],
-        KR: ["Элементы раздела КР", "LOD", "LOI"],
-      },
-      items: {
-        AR: [
-          {
-            "Элементы раздела АР": "Стена",
-            LOD:
-              "Точные габариты, Точное расположение, Внешний образ/вид, Материалы",
-            LOI:
-              "Площадь, Объем, Длина, Ширина, ADSK_Описание, ADSK_Корпус / ADSK_Секция, ADSK_Этаж, ADSK_Огнестойкость",
-          },
-          { "Элементы раздела АР": "Перекрытие", LOD: "Larsen", LOI: "Shaw" },
-          { "Элементы раздела АР": "Пол", LOD: "Geneva", LOI: "Wilson" },
-        ],
-        KR: [
-          {
-            "Элементы раздела КР": "Стена",
-            LOD:
-              "Точные габариты, Точное расположение, Внешний образ/вид, Материалы",
-            LOI:
-              "Площадь, Объем, Длина, Ширина, ADSK_Описание, ADSK_Корпус / ADSK_Секция, ADSK_Этаж, ADSK_Огнестойкость",
-          },
-          { "Элементы раздела КР": "Перекрытие", LOD: "Larsen", LOI: "Shaw" },
-          { "Элементы раздела КР": "Пол", LOD: "Geneva", LOI: "Wilson" },
-        ],
-      },
+      fields: stage_p.fields,
+      items: stage_p.items,
       Stage_P: "vTerminal",
       Stage_RD: "vTerminal",
       // p_stage_value: [
@@ -352,6 +308,10 @@ export default {
 </script>
 
 <style>
+.checkboxes {
+  width: 20px;
+  height: 20px;
+}
 .big-checkbox {
   width: 20px;
   height: 20px;
