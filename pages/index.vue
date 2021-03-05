@@ -1,7 +1,19 @@
 <template>
   <body>
     <b-container>
-      <b-button block variant="primary" @click="clear">Remove text</b-button>
+      <b-sidebar id="my-sidebar" title="" shadow>
+        <div class="px-3 py-2">
+          Здесь можно скачать бесплатные версии EIR - Требований к
+          информационным моделям, или поделиться своим вариантом данных
+          тревбований
+        </div>
+      </b-sidebar>
+      <b-button block variant="primary" v-b-toggle.my-sidebar
+        >Открытый EIR
+      </b-button>
+      <b-button block variant="primary" @click="clear">
+        {{ Remove_text }}</b-button
+      >
       <b-row class="mt-2 text-center">
         <b-col>
           <input
@@ -12,6 +24,7 @@
             @change="check_stage_p"
           />
           Стадия П
+
           <b-collapse id="collapse-1" visible class="mt-2">
             <b-card class="text-center w-100 p-3 bg-secondary text-light">
               <h2>Разделы стадии П</h2>
@@ -101,68 +114,51 @@
                 </b-col>
               </b-row>
               <div id="stage-cards">
-                <b-collapse visible id="collapse-p-ar" class="mt-2">
-                  <TableRequi
-                    :title="titles.AR"
+                <b-collapse
+                  visible
+                  class="mt-2"
+                  v-for="c_id in collaps_ids"
+                  :key="c_id"
+                  v-bind:id="c_id"
+                >
+                  <TableMaun
+                    :section="titles.AR[0]"
+                    :title="titles.AR[1]"
                     :description="Stage_P"
-                    :fields_list="fields.AR"
+                    :items_list="titles.AR"
+                  ></TableMaun>
+                </b-collapse>
+                <b-collapse visible id="collapse-p-ar" class="mt-2">
+                  <TableMaun
+                    :section="titles.AR[0]"
+                    :title="titles.AR[1]"
+                    :description="Stage_P"
                     :items_list="items.AR"
-                  ></TableRequi>
+                  ></TableMaun>
                 </b-collapse>
                 <b-collapse visible id="collapse-p-kr" class="mt-2">
                   <!-- <b-card class="text-center w-100 p-3 bg-secondary text-light"> -->
-                  <TableRequi
-                    :title="titles.KR"
+                  <TableMaun
+                    :section="titles.KR[0]"
+                    :title="titles.KR[1]"
                     :description="Stage_P"
-                    :fields_list="fields.KR"
                     :items_list="items.KR"
-                  ></TableRequi>
+                  ></TableMaun>
                   <!-- </b-card> -->
                 </b-collapse>
                 <b-collapse visible id="collapse-p-ov1" class="mt-2">
-                  <b-card class="text-center w-100 p-3 bg-secondary text-light">
-                    <h5>Отопление</h5>
-                    {{ Stage_P }}
-                  </b-card>
                 </b-collapse>
                 <b-collapse visible id="collapse-p-ov2" class="mt-2">
-                  <b-card class="text-center w-100 p-3 bg-secondary text-light">
-                    <h5>Вентиляция и кондиционирование воздуха</h5>
-                    {{ Stage_P }}
-                  </b-card>
                 </b-collapse>
                 <b-collapse visible id="collapse-p-itp" class="mt-2">
-                  <b-card class="text-center w-100 p-3 bg-secondary text-light">
-                    <h5>Индивидуальный тепловой пункт</h5>
-                    {{ Stage_P }}
-                  </b-card>
                 </b-collapse>
                 <b-collapse visible id="collapse-p-vk" class="mt-2">
-                  <b-card class="text-center w-100 p-3 bg-secondary text-light">
-                    <h5>Внутренние водопровод и канализация</h5>
-                    {{ Stage_P }}
-                  </b-card>
                 </b-collapse>
                 <b-collapse visible id="collapse-p-apt" class="mt-2">
-                  <b-card class="text-center w-100 p-3 bg-secondary text-light">
-                    <h5>
-                      Автоматизация системы дымоудаления или автоматизация
-                      пожаротушения
-                    </h5>
-                    {{ Stage_P }}
-                  </b-card>
                 </b-collapse>
                 <b-collapse visible id="collapse-p-eom" class="mt-2">
-                  <b-card class="text-center w-100 p-3 bg-secondary text-light">
-                    <h5>Электрооборудование и освещение</h5>
-                    {{ Stage_P }}
-                  </b-card>
                 </b-collapse>
                 <b-collapse visible id="collapse-p-ss" class="mt-2">
-                  <b-card class="text-center w-100 p-3 bg-secondary text-light">
-                    <h5>Системы связи</h5>
-                    {{ Stage_P }}
-                  </b-card>
                 </b-collapse>
               </div>
             </b-card>
@@ -197,7 +193,7 @@
 import stage_p from "../documents/stage_p";
 import stage_rd from "../documents/stage_rd";
 import FccButton from "../components/project_section";
-import TableRequi from "../components/table_requirements";
+import TableMaun from "../components/table_maun";
 
 // Vue.component("button-counter", {
 //   data: function() {
@@ -212,65 +208,38 @@ import TableRequi from "../components/table_requirements";
 export default {
   components: {
     FccButton,
-    TableRequi,
+    TableMaun,
   },
   data() {
     return {
-      titles: { AR: "Архитектурные решения", KR: "Конструктивные решения" },
-      fields: stage_p.fields,
+      collaps_ids: null,
+      titles: {
+        AR: ["АР", "Архитектурные решения"],
+        KR: ["КР", "Конструктивные решения"],
+        OV1: "Отопление",
+        OV2: "Вентиляция и кондиционирование воздуха",
+        ITP: "Индивидуальный тепловой пункт",
+        VK: "Внутренние водопровод и канализация",
+        APT:
+          "Автоматизация системы дымоудаления или автоматизация пожаротушения",
+        EOM: "Электрооборудование и освещение",
+        SS: "Системы связи",
+      },
       items: stage_p.items,
       Stage_P: "vTerminal",
       Stage_RD: "vTerminal",
-      // p_stage_value: [
-      //   "АР",
-      //   "КР",
-      //   "ОВ1",
-      //   "ОВ2",
-      //   "ИТП",
-      //   "ВК",
-      //   "АПТ",
-      //   "ЭОМ",
-      //   "СС",
-      // ],
-      // visible_ar: true,
-      // visible_kr: true,
-      // visible_ov1: true,
-      // visible_ov2: true,
-      // visible_itp: true,
-      // visible_vk: true,
-      // visible_apt: true,
-      // visible_eom: true,
-      // visible_ss: true,
-      // visible_ar: true,
-      // options: [
-      //   { text: "АР", value: "АР" },
-      //   { text: "КР", value: "КР" },
-      //   { text: "ОВ1", value: "ОВ1" },
-      //   { text: "ОВ2", value: "ОВ2" },
-      //   { text: "ИТП", value: "ИТП" },
-      //   { text: "ВК", value: "ВК" },
-      //   { text: "АПТ", value: "АПТ" },
-      //   { text: "ЭОМ", value: "ЭОМ" },
-      //   { text: "СС", value: "СС" },
-      // ],
-      // input_dice_value: "100",
-      // input_atacs: "55",
-      // v_slct_hit: '2+',
-      // v_slct_wound: '2+',
-      // v_slct_arm: 'No',
-      // v_slct_fnp: 'No',
-      // answer_data: "",
-      // items: [{from:'', to:"", wound:""}],
-      // myStyle:{
-      // backgroundColor:"#16a085"
-      // }
+      Remove_text: "Remove text",
     };
   },
-  async created() {
+  created() {
     this.Stage_P = null;
     this.Stage_RD = null;
+    let collaps_id_list = [];
+    for (const [key, value] of Object.entries(this.titles)) {
+      collaps_id_list.push(`collapse-p-${key.toLowerCase()}`);
+    }
+    this.collaps_ids = collaps_id_list;
   },
-
   methods: {
     check_stage_p() {
       if (!this.Stage_P) {
@@ -288,8 +257,10 @@ export default {
     },
     clear() {
       if (this.Stage_P != null) {
+        this.Remove_text = "Добавить описание";
         this.Stage_P = null;
       } else {
+        this.Remove_text = "Убрать описание";
         this.Stage_P = stage_p.text;
       }
       if (this.Stage_RD != null) {

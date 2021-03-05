@@ -13,7 +13,7 @@
       :foot-clone="false"
       :no-border-collapse="false"
       :items="items_list"
-      :fields="fields_list"
+      :fields="filds"
       :head-variant="null"
     ></b-table>
     {{ description }}
@@ -22,8 +22,12 @@
 
 <script>
 export default {
-  name: "TableRequi", // vue component name
+  name: "TableMaun", // vue component name
   props: {
+    section: {
+      required: false,
+      default: "AR",
+    },
     title: {
       required: false,
       default: "title",
@@ -46,7 +50,9 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      filds: [`Элементы раздела ${this.section}`, "LOD", "LOI"],
+    };
   },
   methods: {},
 };
