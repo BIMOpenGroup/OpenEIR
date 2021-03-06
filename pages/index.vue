@@ -54,7 +54,7 @@
                     :section="info.section"
                     :title="info.title"
                     :description="Stage_P"
-                    :items_list="items.AR"
+                    :items_list="items[info.key]"
                   ></TableMaun>
                 </b-collapse>
               </div>
@@ -94,7 +94,6 @@ export default {
   },
   data() {
     return {
-      visible: {},
       sections_info: null,
       titles: {
         AR: ["АР", "Архитектурные решения"],
@@ -113,7 +112,7 @@ export default {
       items: stage_p.items,
       Stage_P: "vTerminal",
       Stage_RD: "vTerminal",
-      Remove_text: "Remove text",
+      Remove_text: "Добавить описание",
     };
   },
   created() {
@@ -122,15 +121,14 @@ export default {
     let info_list = [];
     for (const [key, value] of Object.entries(this.titles)) {
       const id = `collapse-p-${key.toLowerCase()}`;
-      this.visible[id] = true;
       info_list.push({
+        key: key,
         c_id: id,
         section: value[0],
         title: value[1],
       });
     }
     this.sections_info = info_list;
-    console.log(this.visible);
   },
   methods: {
     check_stage_p() {
@@ -161,16 +159,16 @@ export default {
         this.Stage_RD = stage_p.text;
       }
     },
-    change_visible(id) {
-      // @click="visible[info.c_id] = !visible[info.c_id]"
-      this.visible[id] = !this.visible[id];
-      console.log(this.visible);
-    },
+    // change_visible(id) {
+    //   // @click="visible[info.c_id] = !visible[info.c_id]"
+    //   this.visible[id] = !this.visible[id];
+    //   console.log(this.visible);
+    // },
   },
   computed: {
-    state() {
-      return this.value.length === 2;
-    },
+    // state() {
+    //   return this.value.length === 2;
+    // },
   },
 };
 </script>
