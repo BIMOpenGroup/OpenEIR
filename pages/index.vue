@@ -24,150 +24,42 @@
             @change="check_stage_p"
           />
           Стадия П
-
           <b-collapse id="collapse-1" visible class="mt-2">
             <b-card class="text-center w-100 p-3 bg-secondary text-light">
-              <h2>Разделы стадии П</h2>
-              <!-- <b-alert show variant="success">Разделы стадии П</b-alert> -->
               <b-row class="mt-2 text-center"> </b-row>
               <b-row id="chekboxes">
-                <b-col>
+                <b-col
+                  class="mt-2"
+                  v-for="info in sections_info"
+                  :key="info.c_id"
+                >
                   <input
                     checked
                     size="lg"
                     type="checkbox"
-                    v-b-toggle.collapse-p-ar
+                    v-b-toggle="info.c_id"
                   />
-                  AР
-                </b-col>
-                <b-col>
-                  <input
-                    checked
-                    size="lg"
-                    type="checkbox"
-                    v-b-toggle.collapse-p-kr
-                  />
-                  КР
-                </b-col>
-                <b-col>
-                  <input
-                    checked
-                    size="lg"
-                    type="checkbox"
-                    v-b-toggle.collapse-p-ov1
-                  />
-                  ОВ1
-                </b-col>
-                <b-col>
-                  <input
-                    checked
-                    size="lg"
-                    type="checkbox"
-                    v-b-toggle.collapse-p-ov2
-                  />
-                  ОВ2
-                </b-col>
-                <b-col>
-                  <input
-                    checked
-                    size="lg"
-                    type="checkbox"
-                    v-b-toggle.collapse-p-itp
-                  />
-                  ИТП
-                </b-col>
-                <b-col>
-                  <input
-                    checked
-                    size="lg"
-                    type="checkbox"
-                    v-b-toggle.collapse-p-vk
-                  />
-                  ВК
-                </b-col>
-                <b-col>
-                  <input
-                    checked
-                    size="lg"
-                    type="checkbox"
-                    v-b-toggle.collapse-p-apt
-                  />
-                  АПТ
-                </b-col>
-                <b-col>
-                  <input
-                    checked
-                    size="lg"
-                    type="checkbox"
-                    v-b-toggle.collapse-p-eom
-                  />
-                  ЕОМ
-                </b-col>
-                <b-col>
-                  <input
-                    checked
-                    size="lg"
-                    type="checkbox"
-                    v-b-toggle.collapse-p-ss
-                  />
-                  СС
+                  {{ info.section }}
                 </b-col>
               </b-row>
               <div id="stage-cards">
                 <b-collapse
                   visible
                   class="mt-2"
-                  v-for="c_id in collaps_ids"
-                  :key="c_id"
-                  v-bind:id="c_id"
+                  v-for="info in sections_info"
+                  :key="info.c_id"
+                  v-bind:id="info.c_id"
                 >
                   <TableMaun
-                    :section="titles.AR[0]"
-                    :title="titles.AR[1]"
-                    :description="Stage_P"
-                    :items_list="titles.AR"
-                  ></TableMaun>
-                </b-collapse>
-                <b-collapse visible id="collapse-p-ar" class="mt-2">
-                  <TableMaun
-                    :section="titles.AR[0]"
-                    :title="titles.AR[1]"
+                    :section="info.section"
+                    :title="info.title"
                     :description="Stage_P"
                     :items_list="items.AR"
                   ></TableMaun>
                 </b-collapse>
-                <b-collapse visible id="collapse-p-kr" class="mt-2">
-                  <!-- <b-card class="text-center w-100 p-3 bg-secondary text-light"> -->
-                  <TableMaun
-                    :section="titles.KR[0]"
-                    :title="titles.KR[1]"
-                    :description="Stage_P"
-                    :items_list="items.KR"
-                  ></TableMaun>
-                  <!-- </b-card> -->
-                </b-collapse>
-                <b-collapse visible id="collapse-p-ov1" class="mt-2">
-                </b-collapse>
-                <b-collapse visible id="collapse-p-ov2" class="mt-2">
-                </b-collapse>
-                <b-collapse visible id="collapse-p-itp" class="mt-2">
-                </b-collapse>
-                <b-collapse visible id="collapse-p-vk" class="mt-2">
-                </b-collapse>
-                <b-collapse visible id="collapse-p-apt" class="mt-2">
-                </b-collapse>
-                <b-collapse visible id="collapse-p-eom" class="mt-2">
-                </b-collapse>
-                <b-collapse visible id="collapse-p-ss" class="mt-2">
-                </b-collapse>
               </div>
             </b-card>
           </b-collapse>
-        </b-col>
-      </b-row>
-      <b-row class="mt-2 text-center">
-        <b-col>
-          {{ null }}
         </b-col>
       </b-row>
       <b-row class="mt-2 text-center">
@@ -195,16 +87,6 @@ import stage_rd from "../documents/stage_rd";
 import FccButton from "../components/project_section";
 import TableMaun from "../components/table_maun";
 
-// Vue.component("button-counter", {
-//   data: function() {
-//     return {
-//       count: 0,
-//     };
-//   },
-//   template:
-//     '<button v-on:click="count++">Счётчик кликов — {{ count }}</button>',
-// });
-
 export default {
   components: {
     FccButton,
@@ -212,18 +94,21 @@ export default {
   },
   data() {
     return {
-      collaps_ids: null,
+      visible: {},
+      sections_info: null,
       titles: {
         AR: ["АР", "Архитектурные решения"],
         KR: ["КР", "Конструктивные решения"],
-        OV1: "Отопление",
-        OV2: "Вентиляция и кондиционирование воздуха",
-        ITP: "Индивидуальный тепловой пункт",
-        VK: "Внутренние водопровод и канализация",
-        APT:
+        OV1: ["ОВ1", "Отопление"],
+        OV2: ["ОВ2", "Вентиляция и кондиционирование воздуха"],
+        ITP: ["ИТП", "Индивидуальный тепловой пункт"],
+        VK: ["ВК", "Внутренние водопровод и канализация"],
+        APT: [
+          "АПТ",
           "Автоматизация системы дымоудаления или автоматизация пожаротушения",
-        EOM: "Электрооборудование и освещение",
-        SS: "Системы связи",
+        ],
+        EOM: ["ЭОМ", "Электрооборудование и освещение"],
+        SS: ["СС", "Системы связи"],
       },
       items: stage_p.items,
       Stage_P: "vTerminal",
@@ -234,11 +119,18 @@ export default {
   created() {
     this.Stage_P = null;
     this.Stage_RD = null;
-    let collaps_id_list = [];
+    let info_list = [];
     for (const [key, value] of Object.entries(this.titles)) {
-      collaps_id_list.push(`collapse-p-${key.toLowerCase()}`);
+      const id = `collapse-p-${key.toLowerCase()}`;
+      this.visible[id] = true;
+      info_list.push({
+        c_id: id,
+        section: value[0],
+        title: value[1],
+      });
     }
-    this.collaps_ids = collaps_id_list;
+    this.sections_info = info_list;
+    console.log(this.visible);
   },
   methods: {
     check_stage_p() {
@@ -269,6 +161,11 @@ export default {
         this.Stage_RD = stage_p.text;
       }
     },
+    change_visible(id) {
+      // @click="visible[info.c_id] = !visible[info.c_id]"
+      this.visible[id] = !this.visible[id];
+      console.log(this.visible);
+    },
   },
   computed: {
     state() {
@@ -279,6 +176,11 @@ export default {
 </script>
 
 <style>
+.sidebar {
+  background: #363636;
+  font-family: "Calibri";
+  color: #ffffff;
+}
 .checkboxes {
   width: 20px;
   height: 20px;
