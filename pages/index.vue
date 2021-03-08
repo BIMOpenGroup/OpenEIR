@@ -20,11 +20,11 @@
             checked
             size="lg"
             type="checkbox"
-            v-b-toggle.collapse-1
+            v-b-toggle.collapse-p
             @change="check_stage_p"
           />
           Стадия П
-          <b-collapse id="collapse-1" visible class="mt-2">
+          <b-collapse id="collapse-p" visible class="mt-2">
             <b-card class="text-center w-100 p-3 bg-secondary text-light">
               <b-row class="mt-2 text-center"> </b-row>
               <b-row id="chekboxes">
@@ -66,11 +66,11 @@
         <b-col>
           <input
             type="checkbox"
-            v-b-toggle.collapse-2
+            v-b-toggle.collapse-rd
             @change="check_stage_rd"
           />
           Стадия РД
-          <b-collapse id="collapse-2" class="mt-2">
+          <b-collapse id="collapse-rd" class="mt-2">
             <b-card class="text-center w-100 p-3 bg-secondary text-light">
               {{ Stage_RD }}
             </b-card>
