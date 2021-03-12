@@ -84,12 +84,11 @@
 <script>
 import stage_p from "../documents/stage_p";
 import stage_rd from "../documents/stage_rd";
-import FccButton from "../components/project_section";
+// import FccButton from "../components/project_section";
 import TableMaun from "../components/table_maun";
 
 export default {
   components: {
-    FccButton,
     TableMaun,
   },
   data() {

@@ -51,23 +51,23 @@ export default {
   },
   data() {
     return {
-      filds: [`Элементы раздела ${this.section}`, "LOD", "LOI"],
+      filds: ["ElementName", "LOD", "LOI"],
       items_list_fixed: [],
     };
   },
   created() {
-    if (this.items_list) {
-      for (let item in this.items_list) {
-        // const fixed_item = {`Элементы раздела ${this.section}`: item[key]}
-        item = renamekey(
-          item,
-          "ElementName",
-          `Элементы раздела ${this.section}`
-        );
-        this.items_list_fixed.push(item);
-      }
-      console.log(this.items_list_fixed);
-    }
+    // if (this.items_list) {
+    //   for (let item in this.items_list) {
+    //     // const fixed_item = {`Элементы раздела ${this.section}`: item[key]}
+    //     item = renamekey(
+    //       item,
+    //       "ElementName",
+    //       `Элементы раздела ${this.section}`
+    //     );
+    //     this.items_list_fixed.push(item);
+    //   }
+    //   console.log(this.items_list_fixed);
+    // }
   },
   methods: {},
 };
