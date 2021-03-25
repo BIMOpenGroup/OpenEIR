@@ -1,5 +1,7 @@
 https://docs.google.com/document/d/17GL3tnJJSis04PUspulQXuDO-VvbfFVBW-TyIWB7w8w/edit?usp=sharing
 
+https://docs.google.com/document/d/15dmTM3FdaEYo21UdS7Xpo19XMSm-df-wWjIy7HdFVmw/edit?usp=sharing
+
 <strong>Подготовленная модель должна удовлетворять требованиям, приведенным в таблицах данного раздела.</strong>
 
 Матрица соответствия LOD этапам проекта для раздела АР (включая АС). 
