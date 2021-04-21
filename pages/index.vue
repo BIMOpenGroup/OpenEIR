@@ -8,11 +8,20 @@
           тревбований
         </div>
       </b-sidebar>
+      <b-form-file
+        v-model="file"
+        ref="file-input"
+        class="mb-2"
+        placeholder="Загрузить таблицу LOD в CSV"
+      ></b-form-file>
       <b-button block variant="primary" v-b-toggle.my-sidebar
-        >Открытый EIR
+        >Описание
       </b-button>
-      <b-button block variant="primary" @click="clear">
-        {{ Remove_text }}</b-button
+      <b-button block variant="primary" @click="base_eir_create">
+        {{ Base_Eir_Load_Text }}</b-button
+      >
+      <b-button block variant="primary" @click="load_from_csv">
+        Загрузить EIR из CSV файла</b-button
       >
       <b-row class="mt-2 text-center">
         <b-col>
@@ -84,16 +93,15 @@
 <script>
 import stage_p from "../documents/stage_p";
 import stage_rd from "../documents/stage_rd";
-import FccButton from "../components/project_section";
 import TableMaun from "../components/table_maun";
 
 export default {
   components: {
-    FccButton,
     TableMaun,
   },
   data() {
     return {
+      file: null,
       sections_info: null,
       titles: {
         AR: ["АР", "Архитектурные решения"],
@@ -110,25 +118,26 @@ export default {
         SS: ["СС", "Системы связи"],
       },
       items: stage_p.items,
-      Stage_P: "vTerminal",
-      Stage_RD: "vTerminal",
+      Stage_P: null,
+      Stage_RD: null,
       Remove_text: "Добавить описание",
+      Base_Eir_Load_Text: "Загрузить базовый EIR",
     };
   },
   created() {
-    this.Stage_P = null;
-    this.Stage_RD = null;
-    let info_list = [];
-    for (const [key, value] of Object.entries(this.titles)) {
-      const id = `collapse-p-${key.toLowerCase()}`;
-      info_list.push({
-        key: key,
-        c_id: id,
-        section: value[0],
-        title: value[1],
-      });
-    }
-    this.sections_info = info_list;
+    // this.Stage_P = null;
+    // this.Stage_RD = null;
+    // let info_list = [];
+    // for (const [key, value] of Object.entries(this.titles)) {
+    //   const id = `collapse-p-${key.toLowerCase()}`;
+    //   info_list.push({
+    //     key: key,
+    //     c_id: id,
+    //     section: value[0],
+    //     title: value[1],
+    //   });
+    // }
+    // this.sections_info = info_list;
   },
   methods: {
     check_stage_p() {
@@ -157,6 +166,34 @@ export default {
         this.Stage_RD = null;
       } else {
         this.Stage_RD = stage_p.text;
+      }
+    },
+    base_eir_create() {
+      if (this.Stage_P == null) {
+        let info_list = [];
+        for (const [key, value] of Object.entries(this.titles)) {
+          const id = `collapse-p-${key.toLowerCase()}`;
+          info_list.push({
+            key: key,
+            c_id: id,
+            section: value[0],
+            title: value[1],
+          });
+        }
+        this.sections_info = info_list;
+        this.Base_Eir_Load_Text = "Обнулить конструктор EIR";
+      } else {
+        this.Stage_P = null;
+        this.sections_info = null;
+        this.Base_Eir_Load_Text = "Загрузить базовый EIR";
+      }
+    },
+    load_from_csv() {
+      var reader = new FileReader();
+      if (this.file != null) {
+        reader.readAsText(this.file);
+        reader.onload = (e) => console.log(reader.result);
+        console.log(this.file);
       }
     },
     // change_visible(id) {
