@@ -3,22 +3,31 @@ export default {
     AR: [
       {
         ElementName: "Стена",
+        LOD: [
+          "Точные габариты",
+          "Точное расположение",
+          "Внешний образ/вид",
+          "Материалы",
+        ],
+        LOI:
+          "Площадь, Объем, Длина, Ширина, ADSK_Описание, ADSK_Корпус / ADSK_Секция, ADSK_Этаж, ADSK_Огнестойкость",
+        softwre_LOI: {
+          Площадь: "Area",
+          Объем: ["Volume", "BuildinParameter.OST_Volume"],
+          Длина: "Length",
+        },
+      },
+      {
+        ElementName: "Перекрытие",
         LOD:
           "Точные габариты, Точное расположение, Внешний образ/вид, Материалы",
         LOI:
           "Площадь, Объем, Длина, Ширина, ADSK_Описание, ADSK_Корпус / ADSK_Секция, ADSK_Этаж, ADSK_Огнестойкость",
         softwre_LOI: {
-          "Площадь": "Area", "Объем": ["Volume", "BuildinParameter.OST_Volume"], "Длина": "Length" 
-        }
-      },
-      { 
-        ElementName: "Перекрытие", 
-        LOD: "Точные габариты, Точное расположение, Внешний образ/вид, Материалы",
-        LOI:
-            "Площадь, Объем, Длина, Ширина, ADSK_Описание, ADSK_Корпус / ADSK_Секция, ADSK_Этаж, ADSK_Огнестойкость",
-        softwre_LOI: {
-          "Площадь": "Area", "Объем": ["Volume", "BuildinParameter.OST_Volume"], "Длина": "Length"
-        }
+          Площадь: "Area",
+          Объем: ["Volume", "BuildinParameter.OST_Volume"],
+          Длина: "Length",
+        },
       },
       { ElementName: "Пол", LOD: "Geneva", LOI: "Wilson" },
     ],

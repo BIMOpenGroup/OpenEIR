@@ -91,9 +91,10 @@
 </template>
 
 <script>
-import stage_p from "../documents/stage_p";
-import stage_rd from "../documents/stage_rd";
+import stage_p from "./documents/stage_p";
+// import stage_rd from "../documents/stage_rd";
 import TableMaun from "../components/table_maun";
+import lod from "./documents/lod";
 
 export default {
   components: {
@@ -188,12 +189,44 @@ export default {
         this.Base_Eir_Load_Text = "Загрузить базовый EIR";
       }
     },
-    load_from_csv() {
+    async load_from_csv() {
+      const _ = require("lodash");
       var reader = new FileReader();
       if (this.file != null) {
         reader.readAsText(this.file);
-        reader.onload = (e) => console.log(reader.result);
-        console.log(this.file);
+        reader.onload = (e) => {
+          let category_data = [];
+          let items = {};
+          let text_from_csv = reader.result;
+          console.log(text_from_csv);
+          let rows_from_csv = text_from_csv.split("\n");
+          for (let row of rows_from_csv) {
+            const text_data = row.split(",");
+            if (text_data.length == 1) {
+            } else {
+              let cat_obj = {
+                ElementName: text_data.shift(),
+                LOD: [],
+                LOI: [],
+              };
+              for (let text of text_data) {
+                text = _.trim(text);
+                text = _.trim(text, '"');
+                if (_.includes(lod.LOD_I, text)) {
+                  cat_obj.LOI.push(text);
+                } else {
+                  cat_obj.LOD.push(text);
+                }
+              }
+              category_data.push(cat_obj);
+            }
+            // test.push(row.split(","));
+            // test.length;
+          }
+          this.items = { AR: category_data };
+          console.log(category_data);
+        };
+        // console.log(this.file);
       }
     },
     // change_visible(id) {
@@ -208,6 +241,8 @@ export default {
     // },
   },
 };
+
+function redFromCSV() {}
 </script>
 
 <style>
