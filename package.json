@@ -23,7 +23,8 @@
     "bootstrap-vue": "^2.21.2",
     "lodash": "^4.17.21",
     "nuxt": "^2.15.2",
-    "vue": "^2.6.12"
+    "vue": "^2.6.12",
+    "vue-blob-json-csv": "^0.1.7"
   },
   "devDependencies": {
     "cross-env": "^6.0.3",

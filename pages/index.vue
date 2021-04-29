@@ -23,6 +23,14 @@
       <b-button block variant="primary" @click="load_from_csv">
         Загрузить EIR из CSV файла</b-button
       >
+      <b-button block variant="primary">
+        <vue-blob-json-csv
+          title="Download JSON EIR"
+          file-type="json"
+          file-name="EIR-LOD-LOI"
+          :data="[items]"
+        />
+      </b-button>
       <b-row class="mt-2 text-center">
         <b-col>
           <input
@@ -95,6 +103,10 @@ import stage_p from "./documents/stage_p";
 // import stage_rd from "../documents/stage_rd";
 import TableMaun from "../components/table_maun";
 import lod from "./documents/lod";
+// import VueJsonPretty from "vue-json-pretty";
+import VueBlobJsonCsv from "vue-blob-json-csv";
+import Vue from "vue";
+Vue.use(VueBlobJsonCsv);
 
 export default {
   components: {
@@ -123,6 +135,21 @@ export default {
       Stage_RD: null,
       Remove_text: "Добавить описание",
       Base_Eir_Load_Text: "Загрузить базовый EIR",
+      todos: [
+        {
+          userId: 1,
+          id: 1,
+          title: "delectus aut autem",
+          completed: false,
+        },
+        {
+          userId: 1,
+          id: 5,
+          title:
+            "laboriosam mollitia et enim quasi adipisci quia provident illum",
+          completed: false,
+        },
+      ],
     };
   },
   created() {
