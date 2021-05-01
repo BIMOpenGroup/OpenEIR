@@ -12,10 +12,20 @@
       :fixed="true"
       :foot-clone="false"
       :no-border-collapse="false"
-      :items="items_list"
       :fields="filds"
+      :items="items_list"
       :head-variant="null"
-    ></b-table>
+    >
+      <template v-slot:cell(ElementName)="row">
+        <b-form-input v-model="row.item.ElementName" />
+      </template>
+      <template v-slot:cell(LOD)="row">
+        <b-form-input v-model="row.item.LOD" />
+      </template>
+      <template v-slot:cell(LOI)="row">
+        <b-form-input v-model="row.item.LOI" />
+      </template>
+    </b-table>
     {{ description }}
   </b-card>
 </template>
