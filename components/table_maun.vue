@@ -16,7 +16,7 @@
       :items="items_list"
       :head-variant="null"
     >
-      <template v-slot:cell(ElementName)="row">
+      <!-- <template v-slot:cell(ElementName)="row">
         <b-form-input v-model="row.item.ElementName" />
       </template>
       <template v-slot:cell(LOD)="row">
@@ -24,7 +24,7 @@
       </template>
       <template v-slot:cell(LOI)="row">
         <b-form-input v-model="row.item.LOI" />
-      </template>
+      </template> -->
     </b-table>
     {{ description }}
   </b-card>

@@ -129,27 +129,28 @@ export default {
         ],
         EOM: ["ЭОМ", "Электрооборудование и освещение"],
         SS: ["СС", "Системы связи"],
+        unknown: ["", "Вне классификации"],
       },
       items: stage_p.items,
       Stage_P: null,
       Stage_RD: null,
       Remove_text: "Добавить описание",
       Base_Eir_Load_Text: "Загрузить базовый EIR",
-      todos: [
-        {
-          userId: 1,
-          id: 1,
-          title: "delectus aut autem",
-          completed: false,
-        },
-        {
-          userId: 1,
-          id: 5,
-          title:
-            "laboriosam mollitia et enim quasi adipisci quia provident illum",
-          completed: false,
-        },
-      ],
+      //   todos: [
+      //     {
+      //       userId: 1,
+      //       id: 1,
+      //       title: "delectus aut autem",
+      //       completed: false,
+      //     },
+      //     {
+      //       userId: 1,
+      //       id: 5,
+      //       title:
+      //         "laboriosam mollitia et enim quasi adipisci quia provident illum",
+      //       completed: false,
+      //     },
+      //   ],
     };
   },
   created() {
@@ -224,12 +225,21 @@ export default {
         reader.onload = (e) => {
           let category_data = [];
           let items = {};
+          let currunet_section = null;
           let text_from_csv = reader.result;
           console.log(text_from_csv);
           let rows_from_csv = text_from_csv.split("\n");
           for (let row of rows_from_csv) {
             const text_data = row.split(",");
-            if (text_data.length == 1) {
+            if (text_data[0].length <= 3 && text_data.length == 2) {
+              if (currunet_section == null) {
+                currunet_section = section_selector(text_data[0]);
+              } else {
+                items[currunet_section] = category_data;
+                console.log(items);
+                category_data = [];
+                currunet_section = section_selector(text_data[0]);
+              }
             } else {
               let cat_obj = {
                 ElementName: text_data.shift(),
@@ -250,8 +260,8 @@ export default {
             // test.push(row.split(","));
             // test.length;
           }
-          this.items = { AR: category_data };
-          console.log(category_data);
+          this.items = items;
+          console.log(items);
         };
         // console.log(this.file);
       }
@@ -270,6 +280,34 @@ export default {
 };
 
 function redFromCSV() {}
+
+function section_selector(section_name) {
+  if (section_name == "АР" || section_name == "AR") {
+    return "AR";
+  } else if (section_name == "КР" || section_name == "KR") {
+    return "KR";
+  } else if (section_name == "ОВ1" || section_name == "OV1") {
+    return "OV1";
+  } else if (section_name == "ОВ2" || section_name == "OV2") {
+    return "OV2";
+  } else if (section_name == "ИТП" || section_name == "ITP") {
+    return "ITP";
+  } else if (section_name == "ВК" || section_name == "VK") {
+    return "VK";
+  } else if (section_name == "АПТ" || section_name == "APT") {
+    return "APT";
+  } else if (section_name == "ЭОМ" || section_name == "EOM") {
+    return "EOM";
+  } else if (
+    section_name == "СС" ||
+    section_name == "SS" ||
+    section_name == "CC"
+  ) {
+    return "SS";
+  } else {
+    return "unknown";
+  }
+}
 </script>
 
 <style>
